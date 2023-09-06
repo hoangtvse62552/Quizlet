@@ -42,16 +42,32 @@ public class MainPage extends Frame implements ActionListener
         question.setBounds(50, 50, 500, 220);
         question.setLineWrap(true);
         question.setWrapStyleWord(true);
-        
+
         lbNum = new JLabel("Number");
         lbNum.setBounds(30, 30, 100, 20);
         lbNum.setVisible(true);
-        
+
         JLabel lbAnswer = new JLabel("Answer");
         lbAnswer.setBounds(50, 300, 100, 20);
 
         txtAnswer = new JTextField();
         txtAnswer.setBounds(150, 300, 150, 20);
+        txtAnswer.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (txtAnswer.getText().toUpperCase().equals(answer))
+                {
+                    lbError.setText("Đúng òi");
+                }
+                else
+                {
+                    lbError.setText("Sai òi, đáp án là: " + answer);
+                }
+                lbError.setVisible(true);
+            }
+        });
 
         btnSubmit = new JButton("Submit");
         btnSubmit.setBounds(70, 330, 100, 20);
@@ -66,11 +82,11 @@ public class MainPage extends Frame implements ActionListener
         btnReset.addActionListener(this);
 
         btnClose = new JButton("Close");
-        btnClose.setBounds(300, 360, 100, 20);
+        btnClose.setBounds(330, 360, 100, 20);
         btnClose.addActionListener(this);
 
         lbError = new JLabel("Error");
-        lbError.setBounds(50, 360, 300, 20);
+        lbError.setBounds(50, 280, 300, 20);
         lbError.setVisible(false);
 
         add(lbNum);
@@ -127,6 +143,7 @@ public class MainPage extends Frame implements ActionListener
         }
         else if (e.getSource() == btnNext)
         {
+            txtAnswer.setText("");
             randomQuestion();
         }
         else if (e.getSource() == btnReset)
