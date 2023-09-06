@@ -43,6 +43,9 @@ public class MainPage extends Frame implements ActionListener
         question.setLineWrap(true);
         question.setWrapStyleWord(true);
 
+        Font font = new Font("Arial", Font.PLAIN, 16);
+        question.setFont(font);
+
         lbNum = new JLabel("Number");
         lbNum.setBounds(30, 30, 100, 20);
         lbNum.setVisible(true);
