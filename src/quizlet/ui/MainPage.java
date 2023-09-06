@@ -6,6 +6,7 @@ import quizlet.model.QuestionObject;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -24,18 +25,28 @@ public class MainPage extends Frame implements ActionListener
     private JButton           btnNext;
     private JButton           btnReset;
     List<QuestionObject>      qnaRemovedList;
+    private JButton           btnClose;
+    private JLabel            lbNum;
+    private int               count            = 1;
 
     private final JTextField  txtError         = new JTextField();
 
     public MainPage(List<QuestionObject> qnaList)
     {
         this.qnaList = qnaList;
-        this.qnaRemovedList = qnaList;
+        this.qnaRemovedList = new ArrayList<>();
+        qnaRemovedList.addAll(qnaList);
 
         txtError.setColumns(10);
         question = new JTextArea("Question");
-        question.setBounds(50, 50, 500, 250);
-
+        question.setBounds(50, 50, 500, 220);
+        question.setLineWrap(true);
+        question.setWrapStyleWord(true);
+        
+        lbNum = new JLabel("Number");
+        lbNum.setBounds(30, 30, 100, 20);
+        lbNum.setVisible(true);
+        
         JLabel lbAnswer = new JLabel("Answer");
         lbAnswer.setBounds(50, 300, 100, 20);
 
@@ -51,23 +62,30 @@ public class MainPage extends Frame implements ActionListener
         btnNext.addActionListener(this);
 
         btnReset = new JButton("Reset");
-        btnReset.setBounds(300, 330, 100, 20);
+        btnReset.setBounds(330, 330, 100, 20);
         btnReset.addActionListener(this);
+
+        btnClose = new JButton("Close");
+        btnClose.setBounds(300, 360, 100, 20);
+        btnClose.addActionListener(this);
 
         lbError = new JLabel("Error");
         lbError.setBounds(50, 360, 300, 20);
         lbError.setVisible(false);
 
+        add(lbNum);
         add(question);
         add(lbAnswer);
         add(txtAnswer);
         add(btnSubmit);
         add(lbError);
         add(btnNext);
+        add(btnClose);
+        add(btnReset);
         setSize(400, 300);
         setBounds(800, 300, 600, 400);
         setLayout(null);
-        
+
         randomQuestion();
     }
 
@@ -75,6 +93,7 @@ public class MainPage extends Frame implements ActionListener
     {
         if (qnaRemovedList.size() > 0)
         {
+            lbNum.setText(count++ + "/" + qnaList.size());
             Random random = new Random();
             int num = random.nextInt(qnaRemovedList.size());
             question.setText(qnaRemovedList.get(num).getQuestion());
@@ -112,8 +131,14 @@ public class MainPage extends Frame implements ActionListener
         }
         else if (e.getSource() == btnReset)
         {
+            count = 1;
+            qnaRemovedList.clear();
             qnaRemovedList.addAll(qnaList);
             randomQuestion();
+        }
+        if (e.getSource() == btnClose)
+        {
+            System.exit(0);
         }
     }
 }

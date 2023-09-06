@@ -1,8 +1,10 @@
 package quizlet.start;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +34,9 @@ public class Main
     {
         List<QuestionObject> qnaList = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath)))
+
+        
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "UTF-8")))
         {
             String line;
             String question = "";
@@ -42,7 +46,6 @@ public class Main
             {
                 if (checkAnswer(line))
                 {
-
                     answer = line.trim();
                     QuestionObject dto = new QuestionObject(question, answer);
                     qnaList.add(dto);
@@ -62,30 +65,18 @@ public class Main
         return qnaList;
     }
 
-    private static boolean checkNumQuest(String line)
-    {
-        try
-        {
-            String[] items = line.split(" ");
-            Integer.parseInt(items[0].replace('.', ' '));
-        }
-        catch (Exception e)
-        {
-            return false;
-        }
-        return true;
-
-    }
-
     private static boolean checkAnswer(String line)
     {
         try
         {
             String[] items = line.trim().split(" ");
-            if (items.length > 1)
-                return false;
-            else
+            if (items.length == 1 && items[0].length() == 1)
+            {
+//                System.out.println(line + " : " + items[0]);
                 return true;
+            }
+            else
+                return false;
         }
         catch (Exception e)
         {
