@@ -63,6 +63,7 @@ public class UrlPage extends Frame implements ActionListener
         setSize(400, 300);
         setBounds(800, 300, 300, 200);
         setLayout(null);
+        setTitle("From Bin with Love <3");
 
     }
 
@@ -86,7 +87,6 @@ public class UrlPage extends Frame implements ActionListener
         else if (e.getSource() == btnOpenFile)
         {
             int result = fileChooser.showOpenDialog(this);
-
             // Kiểm tra xem người dùng đã chọn tệp hay chưa
             if (result == JFileChooser.APPROVE_OPTION)
             {

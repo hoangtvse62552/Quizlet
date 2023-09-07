@@ -53,7 +53,9 @@ public class Main
                 }
                 else
                 {
-                    question += line.trim() + " \n";
+                    line = line.trim();
+                    line = line.replaceAll("\t", "  ");
+                    question += line + " \n";
                 }
             }
         }
@@ -69,7 +71,7 @@ public class Main
     {
         try
         {
-            line = line.replace("\t", " ");
+            line = line.replaceAll("\t", " ");
             line = line.trim();
             if (line.length() > 0)
             {

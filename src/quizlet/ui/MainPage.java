@@ -3,7 +3,6 @@ package quizlet.ui;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.StyledDocument;
 
 import quizlet.model.QuestionObject;
 
@@ -65,10 +64,10 @@ public class MainPage extends Frame implements ActionListener
         lbNum.setVisible(true);
 
         JLabel lbAnswer = new JLabel("Đáp án");
-        lbAnswer.setBounds(350, 300, 100, 25);
+        lbAnswer.setBounds(350, 280, 100, 25);
 
         txtAnswer = new JTextField();
-        txtAnswer.setBounds(450, 300, 150, 20);
+        txtAnswer.setBounds(450, 280, 150, 25);
         txtAnswer.addActionListener(new ActionListener()
         {
             @Override
@@ -99,11 +98,11 @@ public class MainPage extends Frame implements ActionListener
         btnPre.addActionListener(this);
         btnPre.setEnabled(false);
 
-        btnReset = new JButton("Reset");
+        btnReset = new JButton("Làm lại");
         btnReset.setBounds(670, 330, 100, 25);
         btnReset.addActionListener(this);
 
-        btnClose = new JButton("Close");
+        btnClose = new JButton("Đóng");
         btnClose.setBounds(670, 360, 100, 25);
         btnClose.addActionListener(this);
 
@@ -111,14 +110,14 @@ public class MainPage extends Frame implements ActionListener
         lbError.setBounds(450, 280, 300, 25);
         lbError.setVisible(false);
 
-        btnFocusKeyboard = new JButton("dùng bàn phím");
+        btnFocusKeyboard = new JButton("Dùng bàn phím");
         btnFocusKeyboard.setBounds(340, 360, 200, 25);
         btnFocusKeyboard.addActionListener(this);
 
         lbGuide = new JTextArea("Dùng phím mũi tên <- và -> để di chuyển câu hỏi. Nhấn các phím chữ cái (A,B,C,D,...) để trả lời câu hỏi");
         lbGuide.setBounds(100, 385, 800, 30);
         lbGuide.setVisible(true);
-        
+
         add(lbNum);
         add(question);
         add(lbAnswer);
@@ -186,7 +185,7 @@ public class MainPage extends Frame implements ActionListener
         setSize(400, 300);
         setBounds(800, 300, 1000, 450);
         setLayout(null);
-
+        setTitle("From Bin with Love <3");
         mixListQuestion();
     }
 
