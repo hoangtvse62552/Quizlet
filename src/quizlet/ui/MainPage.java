@@ -3,6 +3,7 @@ package quizlet.ui;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.StyledDocument;
 
 import quizlet.model.QuestionObject;
 
@@ -64,7 +65,7 @@ public class MainPage extends Frame implements ActionListener
         lbNum.setVisible(true);
 
         JLabel lbAnswer = new JLabel("Đáp án");
-        lbAnswer.setBounds(350, 300, 100, 20);
+        lbAnswer.setBounds(350, 300, 100, 25);
 
         txtAnswer = new JTextField();
         txtAnswer.setBounds(450, 300, 150, 20);
@@ -86,38 +87,38 @@ public class MainPage extends Frame implements ActionListener
         });
 
         btnSubmit = new JButton("Kiểm tra");
-        btnSubmit.setBounds(450, 330, 100, 20);
+        btnSubmit.setBounds(450, 330, 100, 25);
         btnSubmit.addActionListener(this);
 
         btnNext = new JButton("Câu tiếp");
-        btnNext.setBounds(560, 330, 100, 20);
+        btnNext.setBounds(560, 330, 100, 25);
         btnNext.addActionListener(this);
 
         btnPre = new JButton("Câu trước");
-        btnPre.setBounds(340, 330, 100, 20);
+        btnPre.setBounds(340, 330, 100, 25);
         btnPre.addActionListener(this);
         btnPre.setEnabled(false);
 
         btnReset = new JButton("Reset");
-        btnReset.setBounds(670, 330, 100, 20);
+        btnReset.setBounds(670, 330, 100, 25);
         btnReset.addActionListener(this);
 
         btnClose = new JButton("Close");
-        btnClose.setBounds(670, 360, 100, 20);
+        btnClose.setBounds(670, 360, 100, 25);
         btnClose.addActionListener(this);
 
         lbError = new JLabel("Error");
-        lbError.setBounds(450, 280, 300, 20);
+        lbError.setBounds(450, 280, 300, 25);
         lbError.setVisible(false);
 
         btnFocusKeyboard = new JButton("dùng bàn phím");
-        btnFocusKeyboard.setBounds(340, 360, 200, 20);
+        btnFocusKeyboard.setBounds(340, 360, 200, 25);
         btnFocusKeyboard.addActionListener(this);
 
-        lbGuide = new JTextArea("Dùng phím mũi tên <- và -> để di chuyển câu hỏi. Nhấn các phím chữ cái để trả lời câu hỏi (A,B,C,D,...)");
-        lbGuide.setBounds(100, 380, 800, 30);
+        lbGuide = new JTextArea("Dùng phím mũi tên <- và -> để di chuyển câu hỏi. Nhấn các phím chữ cái (A,B,C,D,...) để trả lời câu hỏi");
+        lbGuide.setBounds(100, 385, 800, 30);
         lbGuide.setVisible(true);
-
+        
         add(lbNum);
         add(question);
         add(lbAnswer);
@@ -272,6 +273,7 @@ public class MainPage extends Frame implements ActionListener
         }
         else
         {
+            count--;
             question.setText("Hết câu hỏi");
             btnNext.setEnabled(false);
             btnSubmit.setEnabled(false);
@@ -281,16 +283,23 @@ public class MainPage extends Frame implements ActionListener
     private void onClickPre()
     {
         count--;
-        btnNext.setEnabled(true);
-        btnSubmit.setEnabled(true);
-        txtAnswer.setText("");
-        lbNum.setText((count + 1) + "/" + qnaList.size());
-        question.setText(qnaList.get(count).getQuestion());
-        answer = qnaList.get(count).getAnswer();
-        lbError.setVisible(false);
         if (count == 0)
         {
             btnPre.setEnabled(false);
+        }
+        if (count >= 0)
+        {
+            btnNext.setEnabled(true);
+            btnSubmit.setEnabled(true);
+            txtAnswer.setText("");
+            lbNum.setText((count + 1) + "/" + qnaList.size());
+            question.setText(qnaList.get(count).getQuestion());
+            answer = qnaList.get(count).getAnswer();
+            lbError.setVisible(false);
+        }
+        else
+        {
+            count++;
         }
     }
 }

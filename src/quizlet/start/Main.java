@@ -77,7 +77,7 @@ public class Main
 
                 if (items.length == 1)
                 {
-                    System.out.println("[" + line + "] : " + items[0] + " : " + items[0].length());
+//                    System.out.println("[" + line + "] : " + items[0] + " : " + items[0].length());
                     return true;
                 }
                 else
