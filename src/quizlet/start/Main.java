@@ -34,8 +34,6 @@ public class Main
     {
         List<QuestionObject> qnaList = new ArrayList<>();
 
-
-        
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "UTF-8")))
         {
             String line;
@@ -46,7 +44,9 @@ public class Main
             {
                 if (checkAnswer(line))
                 {
-                    answer = line.trim();
+                    line = line.trim();
+                    line = line.toUpperCase();
+                    answer = line;
                     QuestionObject dto = new QuestionObject(question, answer);
                     qnaList.add(dto);
                     question = "";
@@ -69,19 +69,26 @@ public class Main
     {
         try
         {
-            String[] items = line.trim().split(" ");
-            if (items.length == 1 && items[0].length() == 1)
+            line = line.replace("\t", " ");
+            line = line.trim();
+            if (line.length() > 0)
             {
-//                System.out.println(line + " : " + items[0]);
-                return true;
+                String[] items = line.split(" ");
+
+                if (items.length == 1)
+                {
+                    System.out.println("[" + line + "] : " + items[0] + " : " + items[0].length());
+                    return true;
+                }
+                else
+                    return false;
             }
-            else
-                return false;
         }
         catch (Exception e)
         {
             return false;
         }
+        return false;
     }
 
 }
