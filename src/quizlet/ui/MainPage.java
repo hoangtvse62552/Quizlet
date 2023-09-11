@@ -33,13 +33,10 @@ public class MainPage extends Frame implements ActionListener
     private JTextArea         lbGuide;
     private JPanel            panel;
 
-    private final JTextField  txtError         = new JTextField();
-
     public MainPage(List<QuestionObject> qnaList)
     {
         this.qnaList = qnaList;
 
-        txtError.setColumns(10);
         question = new JTextArea("Question");
         question.setBounds(50, 50, 900, 220);
         question.setLineWrap(true);
@@ -64,10 +61,10 @@ public class MainPage extends Frame implements ActionListener
         lbNum.setVisible(true);
 
         JLabel lbAnswer = new JLabel("Đáp án");
-        lbAnswer.setBounds(350, 280, 100, 25);
+        lbAnswer.setBounds(350, 290, 100, 25);
 
         txtAnswer = new JTextField();
-        txtAnswer.setBounds(450, 280, 150, 25);
+        txtAnswer.setBounds(450, 290, 150, 25);
         txtAnswer.addActionListener(new ActionListener()
         {
             @Override
@@ -75,11 +72,11 @@ public class MainPage extends Frame implements ActionListener
             {
                 if (txtAnswer.getText().toUpperCase().equals(answer))
                 {
-                    lbError.setText("Đúng òi");
+                    lbError.setText("Đúng òi em iu");
                 }
                 else
                 {
-                    lbError.setText("Sai òi, đáp án là: " + answer);
+                    lbError.setText("Sai òi em iu, đáp án là: " + answer);
                 }
                 lbError.setVisible(true);
             }
@@ -107,9 +104,10 @@ public class MainPage extends Frame implements ActionListener
         btnClose.addActionListener(this);
 
         lbError = new JLabel("Error");
-        lbError.setBounds(450, 280, 300, 25);
+        lbError.setBounds(450, 270, 300, 25);
         lbError.setVisible(false);
-
+        lbError.setForeground(Color.RED); 
+        
         btnFocusKeyboard = new JButton("Dùng bàn phím");
         btnFocusKeyboard.setBounds(340, 360, 200, 25);
         btnFocusKeyboard.addActionListener(this);
@@ -152,11 +150,11 @@ public class MainPage extends Frame implements ActionListener
                     String keyCharAnswer = keychar + "";
                     if (keyCharAnswer.toUpperCase().equals(answer))
                     {
-                        lbError.setText("Đúng òi");
+                        lbError.setText("Đúng òi em iu");
                     }
                     else
                     {
-                        lbError.setText("Sai òi, đáp án là: " + answer);
+                        lbError.setText("Sai òi em iu, đáp án là: " + answer);
                     }
                     lbError.setVisible(true);
                 }
@@ -227,11 +225,11 @@ public class MainPage extends Frame implements ActionListener
         {
             if (txtAnswer.getText().toUpperCase().equals(answer))
             {
-                lbError.setText("Đúng òi");
+                lbError.setText("Đúng òi em iu");
             }
             else
             {
-                lbError.setText("Sai òi, đáp án là: " + answer);
+                lbError.setText("Sai òi em iu, đáp án là: " + answer);
             }
             lbError.setVisible(true);
         }
@@ -273,7 +271,7 @@ public class MainPage extends Frame implements ActionListener
         else
         {
             count--;
-            question.setText("Hết câu hỏi");
+            question.setText("Hết rồi em iu");
             btnNext.setEnabled(false);
             btnSubmit.setEnabled(false);
         }
